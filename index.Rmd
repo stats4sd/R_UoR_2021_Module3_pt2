@@ -469,7 +469,7 @@ Firstly let's aim to create something showing the average rating (on the y axis)
 2. Find the most voted on movie released in each year
 3. Make the plot showing the average rating of the movie on the y axis and the year of release on the x axis
 
-Step 1 is pretty straightfoward again!
+Step 1 is pretty straightforward again!
 
 ```{r all_4a, exercise = TRUE}
 imdb %>%
@@ -500,7 +500,7 @@ imdb %>%
 Initially it may be difficult to see why this is incorrect; as there is no error message and output doesn't immediately look bad. However check the number of rows - in the first code chunk the output has 108 rows; in the second we only have 106. This is because in two of the years in which movies were released the most voted on entry was not a movie. The `max(numVotes)` value in the second is not restricted to only considering movies.
 
 **QUESTION - Find out the years in which the most voted on entry was not a movie. Do you find anything surprising about this list?**
-```{r all_4Q-solution,exercise=TRUE}
+```{r all_4Q,exercise=TRUE}
 ```
 
 ```{r all_4Q-solution}
@@ -520,7 +520,8 @@ imdb %>%
      filter(type!="movie"&numVotes==max(numVotes)) %>%
        arrange(desc(year))
 
-# As an extension exercise - if you are really feeling very confident in your R skills then try to see if you can write some code which will find those two answers without you having to make any assumptions at all. You can do it with just the functions we have covered so far; although later in the course we will introduce some more functions that would make this considerably easier.
+# As an extension exercise - if you are really feeling very confident in your R skills then try to see if you can write some code which will find those two answers without you having to make any assumptions.
+#You can do it with just the functions we have covered so far; although later in the course we will introduce some more functions that would make this considerably easier.
 
 ```
 
