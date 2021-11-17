@@ -15,7 +15,7 @@ description: >
 library(learnr)
 library(tidyverse)
 tutorial_options(exercise.timelimit = 10)
-options(max.print=200, dplyr.summarise.inform = FALSE)
+options(max.print=1000, dplyr.summarise.inform = FALSE)
 imdb <- readRDS("imdb2021.RDS")
 ```
 
