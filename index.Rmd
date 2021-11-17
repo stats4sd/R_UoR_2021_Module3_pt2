@@ -328,7 +328,7 @@ imdb %>%
 The TV short entry in the list is a definite little gem according to Sam. I will probably watch it on the weekend.
 
 
-**Question: Try to change the order of the commands. What happens if you start with select()? And what happens if you combine the two `filter()` together, by bringing `sci_fi=="TRUE"` inside the second command filter? Take some time to analyse the commands and outputs before looking at the solution**
+**Question: Try to change the order of the commands. What happens if you start with select()? And what happens if you combine the two `filter()` together, by bringing `genre_sci_fi==1` inside the second command filter? Take some time to analyse the commands and outputs before looking at the solution**
 
 ```{r all_2b, exercise = TRUE}
 imdb %>%
@@ -346,7 +346,7 @@ imdb %>%
     filter(genre_sci_fi==1) %>%
       group_by(type) %>%
         filter(numVotes==max(numVotes)) %>%
-# we get an error, because after the command select, the column sci-fi is not in our dataset anymore.
+# we get an error, because after the command select, the column genre_sci_fi is not in our dataset anymore.
 
 # filter combined
 imdb %>%
@@ -404,7 +404,7 @@ imdb %>%
       filter(director=="Quentin Tarantino")
 ```
 
-Having done this, I could just carry forward the mean value of 7.86 by copying this into my later steps as a number. This feels a little unsatisfying though; especially since the IMDB data set i updated every day - this value may be different by tomorrow!
+Having done this, I could just carry forward the mean value by copying this into my later steps as a number. This feels a little unsatisfying though; especially since the IMDB data set i updated every day - this value may be different by tomorrow!
 
 There is though a nice trick we could do using `mutate` and `ifelse`. We could create a new column which if the director is Quentin Tarantino takes the value of `mean_rating` and otherwise takes an NA value. If we were then to take the mean value of this new column, remembering to include na.rm=T, this gives us the average rating for Quentin Tarantino.
 
@@ -449,11 +449,13 @@ imdb %>%
          arrange(desc(mean_rating))
 ```
 And done! 
-I do not really know most of these directors other than Christopher Nolan and Sergio Leone! I think I have a lot of new movies to check out this weekend.
+I do not really know most of these directors other than Christopher Nolan! I think I have a lot of new movies to check out this weekend.
 
 It turns out it needed a few more steps than just asking for `director>"Quentin Tarantino"`. 
 
-Being comfortable with how to use these key data manipulation functions in conjunction with each other, will immediately start to unlock hundreds of possibilities for how you can go about interrogating your data. This requires not only the knowledge of the R functions themselves, but also the ability to think about breaking down your needs into each step. This ability comes from lots of time, practice, and learning from mistakes made along the way - don't worry if you are thinking that it seems a little difficult at first!
+Being comfortable with how to use these key data manipulation functions in conjunction with each other, will immediately start to unlock hundreds of possibilities for how you can go about interrogating your data. 
+This requires not only the knowledge of the R functions themselves, but also the ability to think about breaking down your needs into each step. We did not arrive at that final code box by writing everything all in one go - we slowly build up to it sequentially, line by line.
+This ability comes from lots of time, practice, and learning from mistakes made along the way - don't worry if you are thinking that it seems a little difficult at first!
 
 
 
@@ -500,10 +502,11 @@ imdb %>%
 Initially it may be difficult to see why this is incorrect; as there is no error message and output doesn't immediately look bad. However check the number of rows - in the first code chunk the output has 108 rows; in the second we only have 106. This is because in two of the years in which movies were released the most voted on entry was not a movie. The `max(numVotes)` value in the second is not restricted to only considering movies.
 
 **QUESTION - Find out the years in which the most voted on entry was not a movie. Do you find anything surprising about this list?**
-```{r all_4Q,exercise=TRUE}
+```{r mostvoted, exercise=TRUE}
+
 ```
 
-```{r all_4Q-solution}
+```{r mostvoted-solution}
 # A very simple change is what is needed here: changing type=="movie" into type!="movie"
 imdb %>%
  group_by(year) %>%
